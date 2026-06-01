@@ -1,4 +1,4 @@
-# Airian's Cafe
+# Airian's Cafe - MERN Cafe Ordering System for Campus
 
 A full-stack MERN campus ordering system for standard cafe pre-orders and high-velocity recess batch ordering.
 
