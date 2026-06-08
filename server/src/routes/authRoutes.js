@@ -12,7 +12,7 @@ const router = express.Router();
 router.post(
   "/request-otp",
   asyncHandler(async (req, res) => {
-    const { name, email, phone, campusId, role = "student" } = req.body;
+    const { name, email, phone, role = "student" } = req.body;
 
     if (!name || !email || !phone) {
       return res.status(400).json({ message: "Name, email, and phone are required" });
@@ -39,7 +39,6 @@ router.post(
           name,
           email: normalizedEmail,
           phone,
-          campusId,
           role,
           otp: {
             codeHash,
@@ -99,7 +98,6 @@ router.post(
         name: user.name,
         email: user.email,
         phone: user.phone,
-        campusId: user.campusId,
         role: user.role,
         walletBalance: user.walletBalance
       }
@@ -133,7 +131,6 @@ router.post(
         name: user.name,
         email: user.email,
         phone: user.phone,
-        campusId: user.campusId,
         role: user.role,
         walletBalance: user.walletBalance
       }

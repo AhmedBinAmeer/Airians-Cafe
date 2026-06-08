@@ -9,7 +9,6 @@ const emptyCustomer = {
   name: "",
   email: "",
   phone: "",
-  campusId: "",
   role: "student"
 };
 
@@ -295,29 +294,19 @@ export default function AuthPage() {
                   </div>
                 </label>
 
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <label className="block">
-                    <span className="mb-1 block text-sm font-black text-navy-950">WhatsApp phone</span>
-                    <div className="relative">
-                      <Smartphone className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
-                      <input
-                        value={signup.phone}
-                        onChange={(event) => setSignup({ ...signup, phone: event.target.value })}
-                        placeholder="03001234567"
-                        className="h-11 w-full rounded-md border border-slate-200 pl-10 pr-3 outline-none focus:border-navy-500"
-                        required
-                      />
-                    </div>
-                  </label>
-                  <label className="block">
-                    <span className="mb-1 block text-sm font-black text-navy-950">Campus ID</span>
+                <label className="block">
+                  <span className="mb-1 block text-sm font-black text-navy-950">WhatsApp phone</span>
+                  <div className="relative">
+                    <Smartphone className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
                     <input
-                      value={signup.campusId}
-                      onChange={(event) => setSignup({ ...signup, campusId: event.target.value })}
-                      className="h-11 w-full rounded-md border border-slate-200 px-3 outline-none focus:border-navy-500"
+                      value={signup.phone}
+                      onChange={(event) => setSignup({ ...signup, phone: event.target.value })}
+                      placeholder="03001234567"
+                      className="h-11 w-full rounded-md border border-slate-200 pl-10 pr-3 outline-none focus:border-navy-500"
+                      required
                     />
-                  </label>
-                </div>
+                  </div>
+                </label>
 
                 <button
                   type="submit"
