@@ -1,0 +1,339 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --color-navy-50: #eef3ff;
+  --color-navy-100: #d8e4ff;
+  --color-navy-500: #1f4b99;
+  --color-navy-700: #122a55;
+  --color-navy-800: #0b1d3a;
+  --color-navy-900: #07142b;
+  --color-navy-950: #040b1a;
+
+  --color-saffron: #f7b32b;
+  --color-mint: #36c98e;
+  --color-coral: #f26d5b;
+
+  --shadow-soft: 0 18px 45px rgba(4, 11, 26, 0.18);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ctext y='28' font-size='26'%3E%F0%9F%8D%95%3C/text%3E%3C/svg%3E") 4 4, auto;
+}
+
+/* Restore default cursor on interactive elements so it doesn't feel broken */
+a, button, input, select, textarea, label, [role="button"] {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ctext y='28' font-size='26'%3E%F0%9F%8D%95%3C/text%3E%3C/svg%3E") 4 4, pointer;
+}
+
+/* ─── Global Dark Mode — covers ALL pages ─────────────────────── */
+.dark {
+  /* Base backgrounds */
+  --bg-page:   #040b1a;
+  --bg-card:   #07142b;
+  --bg-sub:    #0b1d3a;
+  --border:    #122a55;
+  --text-main: #f1f5f9;
+  --text-sub:  #94a3b8;
+
+  background-color: var(--bg-page);
+  color: var(--text-main);
+
+  /* Page shell */
+  .app-shell {
+    background-color: var(--bg-page) !important;
+  }
+
+  /* Any white/light card surface */
+  .bg-white:not(.keep-white) {
+    background-color: var(--bg-card) !important;
+    color: var(--text-main) !important;
+  }
+  .bg-slate-50  { background-color: var(--bg-sub)  !important; }
+  .bg-slate-100 { background-color: var(--bg-sub)  !important; }
+
+  /* Text — navy dark text becomes white in dark */
+  .text-navy-950, .text-navy-900, .text-slate-900, .text-slate-800, .text-slate-700 {
+    color: var(--text-main) !important;
+  }
+  .text-slate-600 { color: #cbd5e1 !important; }
+  .text-slate-500 { color: #94a3b8 !important; }
+  .text-slate-400 { color: #64748b !important; }
+
+  /* Borders */
+  .border-slate-100, .border-slate-200, .border-slate-300 {
+    border-color: var(--border) !important;
+  }
+
+  /* Inputs / search */
+  input:not([type="checkbox"]):not([type="radio"]),
+  textarea,
+  select {
+    background-color: var(--bg-sub) !important;
+    border-color: var(--border) !important;
+    color: var(--text-main) !important;
+  }
+  input::placeholder, textarea::placeholder { color: #4b5563 !important; }
+
+  /* Category section headings */
+  section[data-category] h2 {
+    color: var(--text-main) !important;
+  }
+
+  /* Subtle bg for chips/badges that use navy-50 */
+  .bg-navy-50 {
+    background-color: var(--bg-sub) !important;
+  }
+
+  /* Search bar wrapper */
+  .bg-slate-50.dark\:bg-navy-950 {
+    background-color: #040b1a !important;
+  }
+
+  /* Hover states */
+  .hover\:bg-slate-50:hover  { background-color: var(--bg-sub)    !important; }
+  .hover\:bg-slate-100:hover { background-color: var(--border)    !important; }
+  .hover\:text-navy-900:hover { color: #ffffff                    !important; }
+
+  /* Table rows */
+  thead { background-color: var(--bg-sub) !important; }
+  .bg-slate-50.transition-colors { background-color: var(--bg-sub) !important; }
+
+  /* Keep green/red action chips readable */
+  .bg-emerald-50 {
+    background-color: rgba(54, 201, 142, 0.15) !important;
+    color: #4ade80 !important;
+    border-color: rgba(54, 201, 142, 0.3) !important;
+  }
+  .bg-red-50 {
+    background-color: rgba(242, 109, 91, 0.15) !important;
+    color: #f87171 !important;
+    border-color: rgba(242, 109, 91, 0.3) !important;
+  }
+
+  /* Calendar icon in dark */
+  input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); }
+}
+
+/* Admin and Auth Scoped Dark Mode — additional overrides on top of global */
+.dark {
+  .admin-theme, .auth-theme {
+    --bg-card: #0b1d3a;
+    --bg-sub: #040b1a;
+    --border-color: #122a55;
+
+    .bg-white:not(.keep-white) {
+      background-color: var(--bg-card) !important;
+    }
+    .bg-slate-50 {
+      background-color: var(--bg-sub) !important;
+    }
+    .bg-slate-100 {
+      background-color: var(--bg-sub) !important;
+    }
+    .border-slate-200 {
+      border-color: var(--border-color) !important;
+    }
+    .border-slate-100 {
+      border-color: var(--border-color) !important;
+    }
+    .border-slate-300 {
+      border-color: var(--border-color) !important;
+    }
+    .text-navy-950, .text-navy-900, .text-slate-900, .text-slate-800, .text-slate-700 {
+      color: #ffffff !important;
+    }
+    .text-slate-600, .text-slate-550, .text-slate-500 {
+      color: #a0aec0 !important;
+    }
+    .bg-navy-50 {
+      background-color: var(--bg-sub) !important;
+      color: #f7b32b !important;
+    }
+    .hover\:bg-slate-50:hover {
+      background-color: var(--border-color) !important;
+    }
+    .hover\:bg-slate-100:hover {
+      background-color: var(--border-color) !important;
+    }
+    .hover\:text-navy-900:hover {
+      color: #ffffff !important;
+    }
+    input, select, textarea {
+      background-color: var(--bg-sub) !important;
+      border-color: var(--border-color) !important;
+      color: #ffffff !important;
+    }
+    thead {
+      background-color: var(--bg-sub) !important;
+    }
+    .bg-saffron {
+      background-color: #f7b32b !important;
+      color: #040b1a !important;
+    }
+
+    /* Keep active segment & navigation buttons white with high-contrast dark text */
+    .bg-white.shadow-lg, 
+    .bg-white.shadow {
+      background-color: #ffffff !important;
+    }
+    .bg-white.shadow-lg, 
+    .bg-white.shadow,
+    .bg-white.shadow-lg *, 
+    .bg-white.shadow * {
+      color: #040b1a !important;
+    }
+
+    /* Softer red and green action buttons */
+    .bg-emerald-50 {
+      background-color: rgba(54, 201, 142, 0.15) !important;
+      color: #36c98e !important;
+      border-color: rgba(54, 201, 142, 0.3) !important;
+    }
+    .bg-emerald-50:hover {
+      background-color: rgba(54, 201, 142, 0.25) !important;
+    }
+    .bg-red-50 {
+      background-color: rgba(242, 109, 91, 0.15) !important;
+      color: #f26d5b !important;
+      border-color: rgba(242, 109, 91, 0.3) !important;
+    }
+    .bg-red-50:hover {
+      background-color: rgba(242, 109, 91, 0.25) !important;
+    }
+
+    /* Revenue & Orders widgets visual improvements */
+    .bg-emerald-500 {
+      background: linear-gradient(135deg, #064e3b 0%, #022c22 100%) !important;
+      border: 1px solid rgba(54, 201, 142, 0.3) !important;
+      color: #ffffff !important;
+    }
+    .bg-blue-500 {
+      background: linear-gradient(135deg, #1e3a8a 0%, #172554 100%) !important;
+      border: 1px solid rgba(59, 130, 246, 0.3) !important;
+      color: #ffffff !important;
+    }
+    .bg-emerald-500 *, .bg-blue-500 * {
+      color: #ffffff !important;
+    }
+
+    /* Fix chrome/safari calendar indicator color */
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      filter: invert(1);
+    }
+  }
+}
+
+/* ─── Hero Card Animations ─────────────────────────────────────── */
+
+@keyframes kenBurns {
+  from { transform: scale(1)    translate(0, 0); }
+  to   { transform: scale(1.12) translate(-3%, -2%); }
+}
+
+@keyframes float-up {
+  0%   { transform: translateY(0) rotate(0deg) scale(1);        opacity: 0.85; }
+  60%  { transform: translateY(-42px) rotate(14deg) scale(1.1); opacity: 0.6; }
+  100% { transform: translateY(-80px) rotate(-8deg) scale(0.8); opacity: 0; }
+}
+
+@keyframes float-orb {
+  0%, 100% { transform: translate(0px, 0px)    scale(1);    }
+  33%       { transform: translate(20px, -26px) scale(1.14); }
+  66%       { transform: translate(-16px, 14px) scale(0.9);  }
+}
+
+@keyframes shimmer-slide {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center;  }
+}
+
+@keyframes pulse-ring {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(1.07); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-particle {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  animation: float-up linear infinite;
+  will-change: transform, opacity;
+}
+
+.hero-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(60px);
+  animation: float-orb ease-in-out infinite;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.hero-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(247, 179, 43, 0.10) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  animation: shimmer-slide 4s linear infinite;
+  pointer-events: none;
+}
+
+.hero-stat-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  animation: slideUpFade 0.5s ease both;
+}
+.hero-stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(247, 179, 43, 0.18);
+}
+
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.food-image { object-fit: cover; }
+
+.animate-fade-in { animation: fadeIn 0.35s ease both; }
+
+.scrollbar-thin::-webkit-scrollbar       { width: 4px; height: 4px; }
+.scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 99px; }
+
+.scrollbar-none                           { scrollbar-width: none; -ms-overflow-style: none; }
+.scrollbar-none::-webkit-scrollbar        { display: none; }
+

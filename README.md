@@ -1,40 +1,62 @@
-# Airian's Cafe - MERN Cafe Ordering System for Campus
+;jkl;# Airian's Cafe - Enterprise Cafe Ordering System for Campus
 
-A full-stack MERN campus ordering system for standard cafe pre-orders and high-velocity recess batch ordering.
+A full-stack, enterprise-grade campus ordering system for standard cafe pre-orders and high-velocity recess batch ordering. The system has been specifically designed to mirror bold, modern fast-food aesthetics (inspired by KFC) while providing practical operational tools for the campus cafe staff.
+
+Recently modernized from a MERN stack to a highly scalable architecture using Next.js 15 (App Router) and NestJS.
+
+## Key Features
+
+### 🍔 Modern Customer Experience
+- **KFC-Style Bold Menu:** Endless scrolling menu with a sticky category navigation bar (Scrollspy), massive edge-to-edge food imagery, and high-contrast styling.
+- **3-Column Desktop Grid:** Optimized responsive layout that scales beautifully to show 3 columns on standard laptops and desktops.
+- **Slide-out Cart Drawer:** A fully integrated global cart drawer that slides out from any page, eliminating blank space issues and improving navigation flow.
+- **Custom Order Notes:** Customers can leave specific instructions ("Extra spicy", "No onions") for the kitchen on their entire order.
+- **Flexible Payments:** Supports digital Campus Wallet, Cash on Pickup, and manual transfers via JazzCash/Easypaisa.
+
+### 👨‍🍳 Admin & Kitchen Operations
+- **Kitchen Dashboard:** Real-time timeline view of all incoming orders with their requested pickup times.
+- **Bulk Cooking List:** Automatically aggregates all pending orders into a master checklist (e.g., "Cook 15 Zingers") for high-velocity rush hours.
+- **Stock Management:** One-click toggles to instantly hide items from the menu when ingredients run out.
 
 ## Stack
 
-- React + Vite + Tailwind CSS
-- Redux Toolkit for cart and active wave state
-- Node.js + Express
-- MongoDB Atlas through Mongoose
-- UltraMsg WhatsApp notifications
-- Nodemailer email OTP delivery
+- **Frontend:** Next.js (App Router) + React + Tailwind CSS v4 + Lucide Icons
+- **State Management:** Redux Toolkit (for cart, auth, and UI state)
+- **Backend:** NestJS + TypeScript
+- **Database:** MongoDB Atlas through Mongoose
+- **Notifications:** UltraMsg (WhatsApp notifications) + Nodemailer (Email OTPs & status alerts)
 
-## Setup
+## Setup & Running the Project
 
-1. Create `server/.env` from `server/.env.example`.
-2. Add your MongoDB Atlas connection string as `MONGO_URI`.
-3. Add SMTP credentials for email OTPs.
-4. Add UltraMsg credentials for WhatsApp account and order messages.
-5. Optional: create `client/.env` from `client/.env.example` if your API URL is not `http://localhost:5000/api`.
+You can install all dependencies and run both the frontend and backend concurrently from the root workspace directory.
 
-## Run
-
+### Initial Installation
+Install dependencies for both projects in one command:
 ```bash
-npm install
 npm run install:all
-npm run seed
-npm run dev
 ```
 
-Frontend: `http://localhost:5173`
+### Running in Development
+Start both NestJS and Next.js dev servers concurrently:
+```bash
+npm run dev
+```
+- **Frontend (Next.js):** `http://localhost:3000`
+- **Backend (NestJS):** `http://localhost:8080`
 
-Backend: `http://localhost:5000`
+### Production Builds
+Build both packages for production:
+```bash
+npm run build
+```
 
-Default seeded admin:
+And start them in production concurrently:
+```bash
+npm run start
+```
 
-- Email: `admin@airianscafe.edu`
-- Password: `Admin@12345`
+### Default Admin Credentials (Seeded):
+- **Email:** `admin@airianscafe.edu`
+- **Password:** `Admin@12345`
 
-Change this in `server/.env` before production use.
+*(Change this in `nest-server/.env` before production use!)*

@@ -5,3 +5,4 @@ dist
 *.log
 coverage
 .DS_Store
+nest-server/config/firebase-adminsdk.json
