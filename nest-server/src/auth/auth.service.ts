@@ -15,25 +15,22 @@ export class AuthService implements OnModuleInit {
     @InjectModel(User.name) private userModel: Model<User>,
     private jwtService: JwtService,
     private notificationsService: NotificationsService,
-  ) {}
+    ) {}
 
   onModuleInit() {
     if (getApps().length === 0) {
-      const firebaseCredentials = process.env.FIREBASE_CREDENTIALS;
-      if (firebaseCredentials) {
+      const serviceAccountJson = process.env.FIREBASE_SERVICE_ACCOUNT_JSON;
+      if (serviceAccountJson) {
         try {
-          const serviceAccount = JSON.parse(firebaseCredentials);
+          const serviceAccount = JSON.parse(serviceAccountJson);
           initializeApp({
             credential: cert(serviceAccount),
           });
           return;
-        } catch (error) {
-          console.error('Failed to parse FIREBASE_CREDENTIALS env var:', error);
+        } catch (e) {
+          console.error('Failed to parse FIREBASE_SERVICE_ACCOUNT_JSON:', e);
         }
       }
-      // Firebase admin initialization usually requires credentials, but passing no args will use GOOGLE_APPLICATION_CREDENTIALS
-      // or we can initialize with the project id if the user provides it later.
-      // For now, we will just initialize empty which uses default credentials, or we will configure it with the service account later.
       initializeApp();
     }
   }
