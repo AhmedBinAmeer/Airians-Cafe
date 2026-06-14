@@ -5,9 +5,10 @@
   "description": "Airian's Cafe hybrid campus ordering system",
   "scripts": {
     "install:all": "npm install --prefix nest-server && npm install --prefix next-client",
+    "postinstall": "npm install --prefix nest-server",
     "dev": "concurrently \"npm run start:dev --prefix nest-server\" \"npm run dev --prefix next-client\"",
     "build": "npm run build --prefix nest-server && npm run build --prefix next-client",
-    "start": "concurrently \"npm run start:prod --prefix nest-server\" \"npm run start --prefix next-client\""
+    "start": "npm run build --prefix nest-server && npm run start:prod --prefix nest-server"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
