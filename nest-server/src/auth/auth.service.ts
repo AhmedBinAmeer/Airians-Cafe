@@ -2,7 +2,7 @@ import { Injectable, BadRequestException, ConflictException, OnModuleInit } from
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { JwtService } from '@nestjs/jwt';
-import { initializeApp, getApps } from 'firebase-admin/app';
+import { initializeApp, getApps, cert } from 'firebase-admin/app';
 import { getAuth } from 'firebase-admin/auth';
 import { User } from '../schemas/user.schema';
 import * as crypto from 'crypto';
@@ -19,6 +19,18 @@ export class AuthService implements OnModuleInit {
 
   onModuleInit() {
     if (getApps().length === 0) {
+      const firebaseCredentials = process.env.FIREBASE_CREDENTIALS;
+      if (firebaseCredentials) {
+        try {
+          const serviceAccount = JSON.parse(firebaseCredentials);
+          initializeApp({
+            credential: cert(serviceAccount),
+          });
+          return;
+        } catch (error) {
+          console.error('Failed to parse FIREBASE_CREDENTIALS env var:', error);
+        }
+      }
       // Firebase admin initialization usually requires credentials, but passing no args will use GOOGLE_APPLICATION_CREDENTIALS
       // or we can initialize with the project id if the user provides it later.
       // For now, we will just initialize empty which uses default credentials, or we will configure it with the service account later.
