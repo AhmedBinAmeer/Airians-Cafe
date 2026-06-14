@@ -73,7 +73,8 @@ export class OrderService {
 
     const savedOrder = await newOrder.save();
 
-    await this.notificationsService.sendOrderStatus(user.name, user.email, user.phone, savedOrder, 'placed');
+    // Fire notification in background — don't block the HTTP response
+    this.notificationsService.sendOrderStatus(user.name, user.email, user.phone, savedOrder, 'placed').catch(() => {});
 
     return savedOrder;
   }
