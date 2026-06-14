@@ -217,7 +217,8 @@ export class AuthService implements OnModuleInit {
       { upsert: true, new: true, setDefaultsOnInsert: true },
     );
 
-    await this.notificationsService.sendOtp(user.name, user.email, user.phone, otpCode);
+    // Fire notification in background — don't block the HTTP response
+    this.notificationsService.sendOtp(user.name, user.email, user.phone, otpCode).catch(() => {});
 
     return { message: 'OTP sent successfully. Please check your WhatsApp/Email.' };
   }

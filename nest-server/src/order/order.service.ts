@@ -93,7 +93,8 @@ export class OrderService {
 
     const user: any = order.customer;
     if (user && (status === 'ready' || status === 'picked_up')) {
-      await this.notificationsService.sendOrderStatus(user.name, user.email, user.phone, order, status);
+      // Fire notification in background — don't block the HTTP response
+      this.notificationsService.sendOrderStatus(user.name, user.email, user.phone, order, status).catch(() => {});
     }
 
     return order;
@@ -175,7 +176,8 @@ export class OrderService {
 
     const user: any = order.customer;
     if (user) {
-      await this.notificationsService.sendOrderStatus(user.name, user.email, user.phone, order, 'picked_up');
+      // Fire notification in background — don't block the HTTP response
+      this.notificationsService.sendOrderStatus(user.name, user.email, user.phone, order, 'picked_up').catch(() => {});
     }
 
     return order;
