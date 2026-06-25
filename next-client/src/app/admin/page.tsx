@@ -406,9 +406,10 @@ function KitchenTab({
             <div className="mt-5 flex gap-2">
               <input
                 value={quickCode}
-                onChange={(event) => setQuickCode(event.target.value.replace(/\D/g, "").slice(0, 4))}
-                inputMode="numeric"
-                placeholder="4-digit code"
+                onChange={(event) => setQuickCode(event.target.value.replace(/[^a-fA-F0-9]/g, "").toUpperCase().slice(0, 4))}
+                inputMode="text"
+                autoCapitalize="characters"
+                placeholder="e.g. A3F2"
                 className="h-12 min-w-0 flex-1 rounded-md border border-white/10 bg-white px-3 text-center text-xl font-black tracking-[0.35em] text-navy-950 outline-none focus:border-saffron"
               />
               <button className="inline-flex h-12 w-12 items-center justify-center rounded-md bg-saffron text-navy-950 hover:bg-amber-300">
