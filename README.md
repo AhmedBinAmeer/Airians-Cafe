@@ -1,6 +1,6 @@
 # Airian's Cafe - Enterprise Cafe Ordering System for Campus
 
-A full-stack, enterprise-grade campus ordering system for standard cafe pre-orders and high-velocity recess batch ordering. The system has been specifically designed to mirror bold, modern fast-food aesthetics (inspired by KFC) while providing practical operational tools for the campus cafe staff.
+A full-stack, enterprise-grade campus ordering system for standard cafe pre-orders and high-velocity recess batch ordering. The system has been specifically designed to mirror bold, modern fast-food aesthetics.
 
 Recently modernized from a MERN stack to a highly scalable architecture using Next.js 15 (App Router) and NestJS.
 
